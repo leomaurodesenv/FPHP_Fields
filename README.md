@@ -1,7 +1,7 @@
 # FPHP_Fields #
 
 Links:      
-[API Documentation](http://doc.leonardomauro.com/fphp/)
+[API Documentation](http://doc.leonardomauro.com/fphp/) and [PHP Classes](http://www.phpclasses.org/fphp_fields)
    
 Class from package FPHP.   
 
@@ -54,7 +54,7 @@ $form->construct_form(); // <= echo all form, fields and buttons
 * Git: [leomaurodesenv][git]
 * Site: [Portfolio][leomauro]
    
-[gpl]: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-[email]: leo.mauro.desenv@gmail.com
-[git]: https://github.com/leomaurodesenv/
-[leomauro]: http://leonardomauro.com/portfolio/
+[gpl]: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html   
+[email]: leo.mauro.desenv@gmail.com   
+[git]: https://github.com/leomaurodesenv/   
+[leomauro]: http://leonardomauro.com/portfolio/   
