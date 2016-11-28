@@ -10,7 +10,9 @@
 * @copyright © 2016 Leonardo Mauro
 * @license https://opensource.org/licenses/GPL-2.0 GNU Public License (GPL v2)
 * @package FPHP_Fields
+* @access public
 */ 
+
 class E_FPHP_Fields{
 	
 	/** 
@@ -56,9 +58,4 @@ class E_FPHP_Fields{
 	
 }
 
-
-/*$error = new E_FPHP_Fields();
-echo E_FPHP_Fields::E_DESTROYING;
-//echo $error::E_AUTH_COUNT;
-*/
 ?>
