@@ -17,9 +17,12 @@ class E_FPHP_Fields{
 	
 	/** 
 	* Const description.
-	* @var string	$label			Label of 'textarea'.
-	* @var array()	$attr			Attributes of 'textarea'.
-	* @var string	$value			Text inside of 'textarea'.
+	* @var const int	E_DESTROYING		Destroy object.
+	* @var const int	E_INCONSISTENT		Values inconsistent.
+	* @var const int	E_AUTH_REQUIRED		FPHP_Master_Fields: Value required.
+	* @var const int	E_AUTH_PATTERN		FPHP_Master_Fields: Pattern invalid.
+	* @var const int	E_AUTH_TYPE			FPHP_Master_Fields: Type invalid.
+	* @var const int	E_AUTH_COUNT		FPHP_Master_Fields: Count(array) is bigger.
 	*/ 
 	
 	/* All fields */
