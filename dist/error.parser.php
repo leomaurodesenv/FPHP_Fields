@@ -23,8 +23,7 @@ class E_FPHP_Fields{
 	* @var const int	E_AUTH_PATTERN		FPHP_Master_Fields: Pattern invalid.
 	* @var const int	E_AUTH_TYPE			FPHP_Master_Fields: Type invalid.
 	* @var const int	E_AUTH_COUNT		FPHP_Master_Fields: Count(array) is bigger.
-	*/ 
-	
+	*/ 	
 	/* All fields */
 	const E_DESTROYING = 47;
 	const E_INCONSISTENT = 48;
@@ -39,6 +38,7 @@ class E_FPHP_Fields{
 	* Get error parser (string).
 	* @access public
 	* @param int $error	const of E_FPHP_Fields.
+	* @return string
 	*/
 	public static function parser($error){
 		switch($error){
