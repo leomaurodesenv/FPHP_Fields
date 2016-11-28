@@ -49,12 +49,7 @@ $form->construct_form(); // <= echo all form, fields and buttons
 ```
 
 ## Also look ~  	
-* [License GPL v2][gpl]
-* Create by Leonardo Mauro ([leo.mauro.desenv@gmail.com][email])
-* Git: [leomaurodesenv][git]
-* Site: [Portfolio][leomauro]
-   
-[gpl]: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html   
-[email]: leo.mauro.desenv@gmail.com   
-[git]: https://github.com/leomaurodesenv/   
-[leomauro]: http://leonardomauro.com/portfolio/   
+* [License GPL v2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+* Create by Leonardo Mauro (leo.mauro.desenv@gmail.com)
+* Git: [leomaurodesenv](https://github.com/leomaurodesenv/)
+* Site: [Portfolio](http://leonardomauro.com/portfolio/)
