@@ -2,11 +2,11 @@
 
 /** 
 * Class Field_Textarea
-* This class create 'textarea' tag
+* This class create <textarea> tag
 * 
 * @author Leonardo Mauro <leo.mauro.desenv@gmail.com>
 * @link http://leonardomauro.com/portfolio/	Portfolio of Leonardo Mauro
-* @version 1.0.2
+* @version 1.2.1
 * @copyright © 2016 Leonardo Mauro
 * @license https://opensource.org/licenses/GPL-2.0 GNU Public License (GPL v2)
 * @package FPHP_fields
@@ -44,6 +44,7 @@ class Field_Textarea extends FPHP_Master_Fields implements interface_field{
 		$template_attr = array(
 			'id'		=> false,
 			'name'		=> false,
+			'validate'	=> false,
 			'class'		=> false,
 			'style'		=> false,
 			'cols'		=> false,
@@ -52,6 +53,7 @@ class Field_Textarea extends FPHP_Master_Fields implements interface_field{
 		$auth_attr  = array(
 			'id'		=> array('required'=>true, 'type'=>'text'),
 			'name'		=> array('required'=>true, 'type'=>'text'),
+			'validate'	=> array('type'=>'array'),
 			'class'		=> array('type'=>'text'),
 			'style'		=> array('type'=>'text'),
 			'cols'		=> array('type'=>'int'),
@@ -129,48 +131,7 @@ class Field_Textarea extends FPHP_Master_Fields implements interface_field{
 	* @access public
 	*/
 	public function _get_label($in_attr=false){
-		/* Create templates and authenticate information */
-		$valid = true;
-		$template_attr = array(
-			'highlight'		=> false,
-			'strikethrough'	=> false,
-			'underline'		=> false,
-			'small'			=> false,
-			'bold'			=> false,
-			'italic'		=> false
-		);
-		$auth_attr  = array(
-			'highlight'		=> array('type'=>'bool'),
-			'strikethrough'	=> array('type'=>'bool'),
-			'underline'		=> array('type'=>'bool'),
-			'small'			=> array('type'=>'bool'),
-			'bold'			=> array('type'=>'bool'),
-			'italic'		=> array('type'=>'bool')
-		);
-		parent::template_data($attr_t, $template_attr, $in_attr);
-		
-		/* Authenticated and create label */
-		if(!$valid) return;
-		
-		$out = '';
-		if(parent::is_stringt($this->label)){
-			$out .= ($attr_t['highlight']) ? '<mark>' : null;
-			$out .= ($attr_t['strikethrough']) ? '<s>' : null;
-			$out .= ($attr_t['underline']) ? '<u>' : null;
-			$out .= ($attr_t['small']) ? '<small>' : null;
-			$out .= ($attr_t['bold']) ? '<strong>' : null;
-			$out .= ($attr_t['italic']) ? '<em>' : null;
-			
-			$out .= '<label for="'.$this->attr['id'].'">'.$this->label.'</label>';
-			
-			$out .= ($attr_t['highlight']) ? '</mark>' : null;
-			$out .= ($attr_t['strikethrough']) ? '</s>' : null;
-			$out .= ($attr_t['underline']) ? '</u>' : null;
-			$out .= ($attr_t['small']) ? '</small>' : null;
-			$out .= ($attr_t['bold']) ? '</strong>' : null;
-			$out .= ($attr_t['italic']) ? '</em>' : null;
-		}
-		return $out.'&nbsp;'.PHP_EOL;
+		return parent::construct_label($this->attr['id'], $this->label, $in_attr);
 	}
 }
 

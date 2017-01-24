@@ -2,11 +2,11 @@
 
 /** 
 * Class FPHP_button
-* This class create 'button' tag
+* This class create <button> tag
 * 
 * @author Leonardo Mauro <leo.mauro.desenv@gmail.com>
 * @link http://leonardomauro.com/portfolio/	Portfolio of Leonardo Mauro
-* @version 1.1.0
+* @version 1.2.1
 * @copyright © 2016 Leonardo Mauro
 * @license https://opensource.org/licenses/GPL-2.0 GNU Public License (GPL v2)
 * @package FPHP_fields

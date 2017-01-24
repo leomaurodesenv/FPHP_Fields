@@ -6,7 +6,7 @@
 * 
 * @author Leonardo Mauro <leo.mauro.desenv@gmail.com>
 * @link http://leonardomauro.com/portfolio/	Portfolio of Leonardo Mauro
-* @version 1.2.0
+* @version 1.2.1
 * @copyright © 2016 Leonardo Mauro
 * @license https://opensource.org/licenses/GPL-2.0 GNU Public License (GPL v2)
 * @package FPHP_Fields
@@ -200,15 +200,76 @@ class FPHP_Master_Fields{
 	*/
 	protected function get_attributes($in_attr){
 		$out = ' ';
+		if(!self::is_arrayt($in_attr)) return $out;
 		foreach($in_attr as $attr => $value){
-			if(!self::is_boolt($value)) $out .= $attr.'="'.$value.'" ';
+			if($attr == 'validate' && $value != false) $out .= 'data-validate="'.self::json_hex_quot($value).'" ';
+			elseif(!self::is_boolt($value)) $out .= $attr.'="'.$value.'" ';
 			elseif($attr == 'checked' && $value == true) $out .= 'checked ';
 			elseif($attr == 'selected' && $value == true) $out .= 'selected ';
 			elseif($attr == 'disabled' && $value == true) $out .= 'disabled ';
 		}
 		return $out;
 	}
+
+	/**
+	* Return json with double quots in hexa.
+	* @access private
+	* @param string	$value	Value to be converted.
+	*/
+	private function json_hex_quot($value){
+		return preg_replace('/"/', '\u0022', json_encode($value));
+	}
 	
+	/**
+	* Return the label of field.
+	* @access protected
+	* @param string	$in_attr	Attributes of field.
+	*/
+	protected function construct_label($id, $label, $in_attr=false){ ///////// Terminarrrrrrrrrrrrrr--------------------------------------
+		/* Create templates and authenticate information */
+		$valid = true;
+		$template_attr = array(
+			'highlight'		=> false,
+			'strikethrough'	=> false,
+			'underline'		=> false,
+			'small'			=> false,
+			'bold'			=> false,
+			'italic'		=> false
+		);
+		$auth_attr  = array(
+			'highlight'		=> array('type'=>'bool'),
+			'strikethrough'	=> array('type'=>'bool'),
+			'underline'		=> array('type'=>'bool'),
+			'small'			=> array('type'=>'bool'),
+			'bold'			=> array('type'=>'bool'),
+			'italic'		=> array('type'=>'bool')
+		);
+		self::template_data($attr_t, $template_attr, $in_attr);
+		
+		/* Authenticated and create label */
+		if(!$valid) return;
+		
+		$out = '';
+		if(self::is_stringt($label)){
+			$out .= ($attr_t['highlight']) ? '<mark>' : null;
+			$out .= ($attr_t['strikethrough']) ? '<s>' : null;
+			$out .= ($attr_t['underline']) ? '<u>' : null;
+			$out .= ($attr_t['small']) ? '<small>' : null;
+			$out .= ($attr_t['bold']) ? '<strong>' : null;
+			$out .= ($attr_t['italic']) ? '<em>' : null;
+			
+			if($id) $out .= '<label for="'.$id.'">'.$label.'</label>';
+			else $out .= '<label>'.$label.'</label>';
+			
+			$out .= ($attr_t['highlight']) ? '</mark>' : null;
+			$out .= ($attr_t['strikethrough']) ? '</s>' : null;
+			$out .= ($attr_t['underline']) ? '</u>' : null;
+			$out .= ($attr_t['small']) ? '</small>' : null;
+			$out .= ($attr_t['bold']) ? '</strong>' : null;
+			$out .= ($attr_t['italic']) ? '</em>' : null;
+		}
+		return $out.'&nbsp;'.PHP_EOL;
+	}
 }
 
 ?>

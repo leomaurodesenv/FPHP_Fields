@@ -6,7 +6,7 @@
 * 
 * @author Leonardo Mauro <leo.mauro.desenv@gmail.com>
 * @link http://leonardomauro.com/portfolio/	Portfolio of Leonardo Mauro
-* @version 1.0.0
+* @version 1.2.1
 * @copyright © 2016 Leonardo Mauro
 * @license https://opensource.org/licenses/GPL-2.0 GNU Public License (GPL v2)
 * @package FPHP_fields
@@ -128,7 +128,7 @@ class FPHP_form extends FPHP_Master_Fields{
 	*/
 	public function _construct_form(){
 		
-		$out = '<form'.parent::get_attributes($this->attr).'>'.PHP_EOL;
+		$out = '<form fphp-auto-validate'.parent::get_attributes($this->attr).'>'.PHP_EOL;
 		foreach($this->fields as $key => $field){
 			if(method_exists($field,'_get_field'))
 				$out .= $field->_get_field($this->attr['id']);

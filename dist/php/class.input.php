@@ -2,17 +2,17 @@
 
 /** 
 * Class FPHP_input
-* This class create 'input's types of 'text', 'hidden', 'password'
+* This class create <input> type='text|hidden|password'
 * 
 * @author Leonardo Mauro <leo.mauro.desenv@gmail.com>
 * @link http://leonardomauro.com/portfolio/	Portfolio of Leonardo Mauro
-* @version 1.1.1
+* @version 1.2.1
 * @copyright © 2016 Leonardo Mauro
 * @license https://opensource.org/licenses/GPL-2.0 GNU Public License (GPL v2)
 * @package FPHP_fields
 * @access public
 */ 
-class Field_Input extends FPHP_Master_Fields implements interface_field{
+class Field_Input extends FPHP_Master_Fields implements Interface_Field{
 	
 	/** 
 	* Variables description.
@@ -40,9 +40,10 @@ class Field_Input extends FPHP_Master_Fields implements interface_field{
 	*/
     public function __construct($in_type=false, $in_attr=false, $in_label=false, $br=true){
 		/* Create templates and authenticate information */
-		$template_attr = array(
+		$template_attr = [
 			'id'			=> false,
 			'name'			=> false,
+			'validate'		=> false,
 			'class'			=> false,
 			'style'			=> false,
 			'value' 		=> false,
@@ -50,10 +51,11 @@ class Field_Input extends FPHP_Master_Fields implements interface_field{
 			'placeholder' 	=> false,
 			'autocomplete' 	=> false,
 			'disabled' 		=> false
-		);
-		$auth_attr = array(
+		];
+		$auth_attr = [
 			'id'			=> array('required'=>true, 'type'=>'text'),
 			'name'			=> array('required'=>true, 'type'=>'text'),
+			'validate'		=> array('type'=>'array'),
 			'class' 		=> array('type'=>'text'),
 			'style' 		=> array('type'=>'text'),
 			'value' 		=> array('type'=>'text'),
@@ -61,10 +63,10 @@ class Field_Input extends FPHP_Master_Fields implements interface_field{
 			'placeholder' 	=> array('type'=>'text'),
 			'autocomplete' 	=> array('pattern'=>array('on', 'off')),
 			'disabled' 		=> array('type'=>'bool'),
-		);
+		];
 		
-		$auth_type 		= array('required'=>true, 'pattern'=>array('text', 'hidden', 'password'));
-		$auth_label 	= array('type'=>'text');
+		$auth_type 	= ['required'=>true, 'pattern'=>['text', 'hidden', 'password']];
+		$auth_label = ['type'=>'text'];
 		
 		parent::template_data($attr_t, $template_attr, $in_attr);
 		
@@ -136,48 +138,7 @@ class Field_Input extends FPHP_Master_Fields implements interface_field{
 	* @access public
 	*/
 	public function _get_label($in_attr=false){
-		/* Create templates and authenticate information */
-		$valid = true;
-		$template_attr = array(
-			'highlight'		=> false,
-			'strikethrough'	=> false,
-			'underline'		=> false,
-			'small'			=> false,
-			'bold'			=> false,
-			'italic'		=> false
-		);
-		$auth_attr  = array(
-			'highlight'		=> array('type'=>'bool'),
-			'strikethrough'	=> array('type'=>'bool'),
-			'underline'		=> array('type'=>'bool'),
-			'small'			=> array('type'=>'bool'),
-			'bold'			=> array('type'=>'bool'),
-			'italic'		=> array('type'=>'bool')
-		);
-		parent::template_data($attr_t, $template_attr, $in_attr);
-		
-		/* Authenticated and create label */
-		if(!$valid) return;
-		
-		$out = '';
-		if(parent::is_stringt($this->label)){
-			$out .= ($attr_t['highlight']) ? '<mark>' : null;
-			$out .= ($attr_t['strikethrough']) ? '<s>' : null;
-			$out .= ($attr_t['underline']) ? '<u>' : null;
-			$out .= ($attr_t['small']) ? '<small>' : null;
-			$out .= ($attr_t['bold']) ? '<strong>' : null;
-			$out .= ($attr_t['italic']) ? '<em>' : null;
-			
-			$out .= '<label for="'.$this->attr['id'].'">'.$this->label.'</label>';
-			
-			$out .= ($attr_t['highlight']) ? '</mark>' : null;
-			$out .= ($attr_t['strikethrough']) ? '</s>' : null;
-			$out .= ($attr_t['underline']) ? '</u>' : null;
-			$out .= ($attr_t['small']) ? '</small>' : null;
-			$out .= ($attr_t['bold']) ? '</strong>' : null;
-			$out .= ($attr_t['italic']) ? '</em>' : null;
-		}
-		return $out.'&nbsp;'.PHP_EOL;
+		return parent::construct_label($this->attr['id'], $this->label, $in_attr);
 	}
 }
 

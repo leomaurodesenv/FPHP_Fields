@@ -2,11 +2,11 @@
 
 /** 
 * Class FPHP_boxes
-* This class create 'input's types of 'checkbox', 'radio'
+* This class create <input> type='checkbox|radio'
 * 
 * @author Leonardo Mauro <leo.mauro.desenv@gmail.com>
 * @link http://leonardomauro.com/portfolio/	Portfolio of Leonardo Mauro
-* @version 1.1.4
+* @version 1.2.1
 * @copyright © 2016 Leonardo Mauro
 * @license https://opensource.org/licenses/GPL-2.0 GNU Public License (GPL v2)
 * @package FPHP_fields
@@ -194,48 +194,7 @@ class Field_Boxes extends FPHP_Master_Fields implements interface_field{
 	* @access public
 	*/
 	public function _get_label($in_attr=false){
-		/* Create templates and authenticate information */
-		$valid = true;
-		$template_attr = array(
-			'highlight'		=> false,
-			'strikethrough'	=> false,
-			'underline'		=> false,
-			'small'			=> false,
-			'bold'			=> false,
-			'italic'		=> false
-		);
-		$auth_attr  = array(
-			'highlight'		=> array('type'=>'bool'),
-			'strikethrough'	=> array('type'=>'bool'),
-			'underline'		=> array('type'=>'bool'),
-			'small'			=> array('type'=>'bool'),
-			'bold'			=> array('type'=>'bool'),
-			'italic'		=> array('type'=>'bool')
-		);
-		parent::template_data($attr_t, $template_attr, $in_attr);
-		
-		/* Authenticated and create label */
-		if(!$valid) return;
-		
-		$out = '';
-		if(parent::is_stringt($this->label)){
-			$out .= ($attr_t['highlight']) ? '<mark>' : null;
-			$out .= ($attr_t['strikethrough']) ? '<s>' : null;
-			$out .= ($attr_t['underline']) ? '<u>' : null;
-			$out .= ($attr_t['small']) ? '<small>' : null;
-			$out .= ($attr_t['bold']) ? '<strong>' : null;
-			$out .= ($attr_t['italic']) ? '<em>' : null;
-			
-			$out .= '<label>'.$this->label.'</label>';
-			
-			$out .= ($attr_t['highlight']) ? '</mark>' : null;
-			$out .= ($attr_t['strikethrough']) ? '</s>' : null;
-			$out .= ($attr_t['underline']) ? '</u>' : null;
-			$out .= ($attr_t['small']) ? '</small>' : null;
-			$out .= ($attr_t['bold']) ? '</strong>' : null;
-			$out .= ($attr_t['italic']) ? '</em>' : null;
-		}
-		return $out.'<br/>'.PHP_EOL;
+		return parent::construct_label(false, $this->label, $in_attr);
 	}
 	
 }

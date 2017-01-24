@@ -6,7 +6,7 @@
 * 
 * @author Leonardo Mauro <leo.mauro.desenv@gmail.com>
 * @link http://leonardomauro.com/portfolio/	Portfolio of Leonardo Mauro
-* @version 1.1.0
+* @version 1.2.1
 * @copyright © 2016 Leonardo Mauro
 * @license https://opensource.org/licenses/GPL-2.0 GNU Public License (GPL v2)
 * @package FPHP_Fields
@@ -56,7 +56,7 @@ class E_FPHP_Fields{
 			case self::E_AUTH_COUNT:
 				return 'count problem';
 		}
-		return "don't have this error in list."; 
+		return 'don\'t have this error in list.'; 
 	}
 	
 }

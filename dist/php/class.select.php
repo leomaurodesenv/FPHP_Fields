@@ -2,11 +2,11 @@
 
 /** 
 * Class Field_Select
-* This class create 'select' tag
+* This class create <select> tag
 * 
 * @author Leonardo Mauro <leo.mauro.desenv@gmail.com>
 * @link http://leonardomauro.com/portfolio/	Portfolio of Leonardo Mauro
-* @version 1.1.2
+* @version 1.2.1
 * @copyright © 2016 Leonardo Mauro
 * @license https://opensource.org/licenses/GPL-2.0 GNU Public License (GPL v2)
 * @package FPHP_fields
@@ -43,6 +43,7 @@ class Field_Select extends FPHP_Master_Fields implements interface_field{
 		$template_attr = array(
 			'id'		=> false,
 			'name'		=> false,
+			'validate'	=> false,
 			'class'		=> false,
 			'size'		=> false,
 			'disabled'	=> false
@@ -50,6 +51,7 @@ class Field_Select extends FPHP_Master_Fields implements interface_field{
 		$auth_attr  = array(
 			'id'		=> array('required'=>true, 'type'=>'text'),
 			'name'		=> array('required'=>true, 'type'=>'text'),
+			'validate'	=> array('type'=>'array'),
 			'class'		=> array('type'=>'text'),
 			'size'		=> array('type'=>'int'),
 			'disabled'	=> array('type'=>'bool')
@@ -66,7 +68,8 @@ class Field_Select extends FPHP_Master_Fields implements interface_field{
 		
 		$this->label = $in_label;
 		$this->attr = $attr_t;
-		$this->options = array();
+		$this->options = [0=>['text'=>'Select', 'value'=>'', 'attr'=>false]];
+		/*$this->options = []; // <= orign */
 		
 		$this->_is_active = true;
 		$this->_br = (bool) $br;
@@ -123,10 +126,10 @@ class Field_Select extends FPHP_Master_Fields implements interface_field{
 		
 		$auth_text  = array('required'=>true, 'type'=>'text');
 		$auth_value = array('required'=>true);
-		parent::authenticate_data($auth_text, $in_text, 'construct (text)', $valid);
-		parent::authenticate_data($auth_value, $in_value, 'construct (value)', $valid);
+		parent::authenticate_data($auth_text, $in_text, 'add_option (text)', $valid);
+		parent::authenticate_data($auth_value, $in_value, 'add_option (value)', $valid);
 		foreach($template_attr as $key => $value)
-		parent::authenticate_data($auth_attr[$key], $attr_t[$key], 'construct ('.$key.')', $valid, false);
+		parent::authenticate_data($auth_attr[$key], $attr_t[$key], 'add_option ('.$key.')', $valid, false);
 		
 		/* Authenticated and saved information */
 		if(!$valid) return;
@@ -205,48 +208,7 @@ class Field_Select extends FPHP_Master_Fields implements interface_field{
 	* @access public
 	*/
 	public function _get_label($in_attr=false){
-		/* Create templates and authenticate information */
-		$valid = true;
-		$template_attr = array(
-			'highlight'		=> false,
-			'strikethrough'	=> false,
-			'underline'		=> false,
-			'small'			=> false,
-			'bold'			=> false,
-			'italic'		=> false
-		);
-		$auth_attr  = array(
-			'highlight'		=> array('type'=>'bool'),
-			'strikethrough'	=> array('type'=>'bool'),
-			'underline'		=> array('type'=>'bool'),
-			'small'			=> array('type'=>'bool'),
-			'bold'			=> array('type'=>'bool'),
-			'italic'		=> array('type'=>'bool')
-		);
-		parent::template_data($attr_t, $template_attr, $in_attr);
-		
-		/* Authenticated and create label */
-		if(!$valid) return;
-		
-		$out = '';
-		if(parent::is_stringt($this->label)){
-			$out .= ($attr_t['highlight']) ? '<mark>' : null;
-			$out .= ($attr_t['strikethrough']) ? '<s>' : null;
-			$out .= ($attr_t['underline']) ? '<u>' : null;
-			$out .= ($attr_t['small']) ? '<small>' : null;
-			$out .= ($attr_t['bold']) ? '<strong>' : null;
-			$out .= ($attr_t['italic']) ? '<em>' : null;
-			
-			$out .= '<label for="'.$this->attr['id'].'">'.$this->label.'</label>';
-			
-			$out .= ($attr_t['highlight']) ? '</mark>' : null;
-			$out .= ($attr_t['strikethrough']) ? '</s>' : null;
-			$out .= ($attr_t['underline']) ? '</u>' : null;
-			$out .= ($attr_t['small']) ? '</small>' : null;
-			$out .= ($attr_t['bold']) ? '</strong>' : null;
-			$out .= ($attr_t['italic']) ? '</em>' : null;
-		}
-		return $out.'&nbsp;'.PHP_EOL;
+		return parent::construct_label($this->attr['id'], $this->label, $in_attr);
 	}
 	
 }
