@@ -12,9 +12,9 @@
 	
 	<!-- Jquery Validate Includes -->
 	<script src="../dist/js/jquery.min.js"></script>
-	<script src="../dist/js/jquery.validate.min.js"></script>
-	<!-- <script src="../dist/js/jquery.validate-messages-pt-br.js"></script> Brazilian Language -->
-	<script src="../dist/js/jquery.validate-auto.js"></script>
+	<script src="../dist/js/validate/jquery.validate.min.js"></script>
+	<!-- <script src="../dist/js/validate/jquery.validate-messages-pt-br.js"></script> Brazilian Language -->
+	<script src="../dist/js/validate/jquery.validate-auto.js"></script>
 
 	<!-- Bootstrap - Latest compiled and minified CSS and JS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
@@ -31,51 +31,52 @@ label.error{width:100%;color:#d22626;font-weight:normal;font-style:italic;margin
 <div class="jumbotron">
 <h3>Bootstrap Example</h3>
 <br/>
+
 <?php
 
-/* Class Includes */
-require_once('../dist/php/interface.field.php');
-require_once('../dist/php/error.parser.fields.php');
-require_once('../dist/php/class.master.php');
-require_once('../dist/php/class.input.php');
-require_once('../dist/php/class.boxes.php');
-require_once('../dist/php/class.select.php');
-require_once('../dist/php/class.textarea.php');
-require_once('../dist/php/class.button.php');
-require_once('../dist/php/class.form.php');
+/* Autoload Include */
+require('../dist/php/autoload.php');
+
+use \FPHP\Fields\InputField;
+use \FPHP\Fields\BoxesField;
+use \FPHP\Fields\SelectField;
+use \FPHP\Fields\TextareaField;
+use \FPHP\Fields\ButtonField;
+use \FPHP\Fields\FormField;
 
 /** 
 * Example: Same fields used in /example/index.php, but with style bootstrap
 */
 
-$input = new Field_Input('text', array('name'=>'full_name', 'id'=>'full_name', 'validate'=>['required'=>true, 'minlength'=>10], 'class'=>'form-control'), 'Name');
+$input = new InputField('text', ['name'=>'full_name', 'id'=>'full_name', 'validate'=>['required'=>true, 'minlength'=>10], 'class'=>'form-control'], 'Name');
 
-$checkbox = new Field_Boxes('checkbox', 'boxes', 'Boxes Example');
-$checkbox_data = array(
-	array('text'=>'abc', 'value'=>0, 'attr'=>['validate'=>['required'=>true]]),
-	array('text'=>'bcd', 'value'=>1)
-);
-$checkbox->add_boxes($checkbox_data, array(1));
+$checkbox = new BoxesField('checkbox', 'boxes', 'Boxes Example');
+$checkbox_data = [
+	['text'=>'abc', 'value'=>0, 'attr'=>['validate'=>['required'=>true]]],
+	['text'=>'bcd', 'value'=>1]
+];
+$checkbox->add_boxes($checkbox_data, [1]);
 $checkbox->add_box('cde', 2);
 
-$select = new Field_Select(array('name'=>'foo', 'id'=>'foo', 'class'=>'form-control', 'validate'=>['required'=>true, 'min'=>1]), 'Number Select');
-$select_data = array(
-	array('text'=>'Zero', 'value'=>0),
-	array('text'=>'One', 'value'=>1)
-);
-$select->add_options($select_data, array(0));
+$select = new SelectField(['name'=>'foo', 'id'=>'foo', 'class'=>'form-control', 'validate'=>['required'=>true, 'min'=>1]], 'Number Select');
+$select_data = [
+	['text'=>'Zero', 'value'=>0],
+	['text'=>'One', 'value'=>1]
+];
+$select->add_options($select_data, [0]);
 $select->add_option('Two - new', 2);
 
-$textarea = new Field_Textarea('Big Text', array('id'=>'textbig', 'name'=>'textbig', 'rows'=>5, 'class'=>'form-control'));
+$textarea = new TextareaField('Big Text', ['id'=>'textbig', 'name'=>'textbig', 'rows'=>5, 'class'=>'form-control']);
 
-$button = new Field_Button('submit', 'Send', array('class'=>'btn btn-primary'));
+$button = new ButtonField('submit', 'Send', ['class'=>'btn btn-primary']);
 
-$form = new FPHP_form(array('action'=>'#', 'method'=>'get', 'id'=>'form_example', 'name'=>'form_example'));
-$fields = array($input, $checkbox, $select, $textarea, $button);
+$form = new FormField(['action'=>'#', 'method'=>'get', 'id'=>'form_example', 'name'=>'form_example']);
+$fields = [$input, $checkbox, $select, $textarea, $button];
 $form->add_fields($fields);
 $form->construct_form();
 
 ?>
+
 </div>
 </body>
 </html>
