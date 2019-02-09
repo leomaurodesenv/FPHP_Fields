@@ -7,9 +7,7 @@ Links:
    
 Class from package FPHP.   
    
-**New**: Have a automatic integration with [jquery.validate.js](https://jqueryvalidation.org) methods for all fields.   
-   
-**Fixed**: Problem with boxes; better way to create labels.   
+**Feature**: Have a automatic integration with [jquery.validate.js](https://jqueryvalidation.org) methods for all fields.
    
 ___
    
@@ -68,7 +66,7 @@ $form->construct_form();
 ___
    
 ## Also look ~  	
-* [License GPL v2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
-* Create by Leonardo Mauro (leo.mauro.desenv@gmail.com)
-* Git: [leomaurodesenv](https://github.com/leomaurodesenv/)
-* Site: [Portfolio](http://leonardomauro.com/portfolio/)
+- [License GPL v3](LICENSE)
+- Create by Leonardo Mauro (leo.mauro.desenv@gmail.com)
+- Git: [leomaurodesenv](https://github.com/leomaurodesenv/)
+- Site: [Portfolio](http://leonardomauro.com/portfolio/)
